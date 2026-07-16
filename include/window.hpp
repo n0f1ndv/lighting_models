@@ -1,5 +1,7 @@
 #pragma once
 
+#include "clock.hpp"
+
 #include <glad/glad.h>
 
 #include <GLFW/glfw3.h>
@@ -17,6 +19,8 @@ public:
 
 private:
     GLFWwindow* window;
+
+    Clock* clock;
 
     void Init();
 };

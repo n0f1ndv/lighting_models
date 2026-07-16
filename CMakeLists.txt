@@ -9,6 +9,7 @@ add_executable(app
     src/main.cpp
     src/shader.cpp
     src/window.cpp
+    src/clock.cpp
     libs/glad/glad.c
 )
 

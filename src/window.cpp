@@ -9,6 +9,8 @@ Window::Window(int width, int height)
 }
 
 Window::~Window() {
+    delete clock;
+
     glfwTerminate();
 }
 
@@ -31,11 +33,15 @@ void Window::Init() {
     {
         std::cout << "Failed to initialize GLAD.\n";
         glfwTerminate();
-    }    
+    }
+
+    clock = new Clock();
 }
 
 void Window::Loop() {
     while (!glfwWindowShouldClose(window)) {
+        clock->CalculateDelta();
+
         glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
