@@ -8,6 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(app
     src/main.cpp
     src/shader.cpp
+    src/window.cpp
     libs/glad/glad.c
 )
 
