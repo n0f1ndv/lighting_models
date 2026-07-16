@@ -1,9 +1,9 @@
-## Procedural Terrain Generation
-In this project I want to implement procedural terrain generation using Perlin Noise and OpenGL.
+## Lighting models
+In this project I implmented different lighting models in OpenGL.
 
 ## TODO:
- - Do the research about Perlin Noise algorithm
- - Create a solid structure for the project 
+ - Implement [lighting models](https://en.wikipedia.org/wiki/Computer_graphics_lighting), I will start with Phong and Phong Blinn;
+ - Create a solid structure for the project.
 
 ## Compilation
 Get the repository:

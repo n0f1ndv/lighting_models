@@ -18,3 +18,7 @@ target_include_directories(app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 # Vendor libraries are git submodules
 # add_subdirectory(libs)
 # target_link_libraries(${PROJECT_NAME} PUBLIC name_of_vendor_library)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/glfw)
+
+target_link_libraries(app glfw)
