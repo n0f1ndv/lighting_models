@@ -1,5 +1,5 @@
 ## Lighting models
-In this project I implmented different lighting models in OpenGL.
+In this project I implmented different lighting models in [OpenGL](https://wikis.khronos.org/opengl/Main_Page) using [GLFW](https://www.glfw.org/documentation.html).
 
 ## TODO:
  - Implement [lighting models](https://en.wikipedia.org/wiki/Computer_graphics_lighting), I will start with Phong and Phong Blinn;
