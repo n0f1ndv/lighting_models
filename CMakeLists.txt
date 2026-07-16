@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(app
     src/main.cpp
-    src/glad.c
+    libs/glad/glad.c
 )
 
 target_include_directories(app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
