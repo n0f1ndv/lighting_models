@@ -3,6 +3,9 @@
 Renderer::Renderer() {
     shader = new Shader("src/shaders/vertex_shader.glsl", "src/shaders/fragment_shader.glsl");
 
+    glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
     glGenBuffers(1, &ebo);
