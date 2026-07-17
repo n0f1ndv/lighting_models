@@ -11,6 +11,7 @@ add_executable(app
     src/window.cpp
     src/clock.cpp
     src/renderer.cpp
+    src/camera.cpp
     libs/glad/glad.c
 )
 
