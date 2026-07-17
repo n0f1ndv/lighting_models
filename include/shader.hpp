@@ -6,9 +6,10 @@
 
 class Shader {
 public:
-    GLuint id;
+    GLuint program;
 
     Shader(std::string path_to_vertex_shader, std::string path_to_fragment_shader);
+    ~Shader();
 
 private:
     GLuint CompileShader(std::string path_to_file, char type);

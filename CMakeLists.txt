@@ -10,6 +10,7 @@ add_executable(app
     src/shader.cpp
     src/window.cpp
     src/clock.cpp
+    src/renderer.cpp
     libs/glad/glad.c
 )
 
@@ -23,7 +24,7 @@ target_include_directories(app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 # add_subdirectory(libs)
 # target_link_libraries(${PROJECT_NAME} PUBLIC name_of_vendor_library)
 
-target_include_directories(app SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs)
+target_include_directories(app SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/glm)
 target_include_directories(app SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/glfw)

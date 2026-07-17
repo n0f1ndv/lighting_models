@@ -10,6 +10,7 @@ Window::Window(int width, int height)
 
 Window::~Window() {
     delete clock;
+    delete renderer;
 
     glfwTerminate();
 }
@@ -35,6 +36,7 @@ void Window::Init() {
         glfwTerminate();
     }
 
+    renderer = new Renderer();
     clock = new Clock();
 }
 
@@ -44,6 +46,8 @@ void Window::Loop() {
 
         glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        renderer->Draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents();

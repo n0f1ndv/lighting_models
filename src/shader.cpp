@@ -16,6 +16,10 @@ Shader::Shader(std::string path_to_vertex_shader, std::string path_to_fragment_s
     std::clog << "Successfully compiled and linked shaders.\n";
 }
 
+Shader::~Shader() {
+    glDeleteProgram(program);
+}
+
 GLuint Shader::CompileShader(std::string path_to_file, char type) {
     std::string source = ReadFile(path_to_file);
 
@@ -57,7 +61,7 @@ GLuint Shader::CompileShader(std::string path_to_file, char type) {
 }
 
 void Shader::LinkShader(GLuint vertexShader, GLuint fragmentShader) {
-    GLuint program = glCreateProgram();
+    program = glCreateProgram();
 
     glAttachShader(program, vertexShader);
     glAttachShader(program, fragmentShader);
