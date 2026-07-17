@@ -11,6 +11,7 @@ Window::Window(int width, int height)
 Window::~Window() {
     delete clock;
     delete renderer;
+    delete shader;
 
     glfwTerminate();
 }
@@ -36,7 +37,9 @@ void Window::Init() {
         glfwTerminate();
     }
 
-    renderer = new Renderer();
+    shader = new Shader("src/shaders/vertex_shader.glsl", "src/shaders/fragment_shader.glsl");
+    camera = new Camera(shader, width, height);
+    renderer = new Renderer(shader);
     clock = new Clock();
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "camera.hpp"
 #include "renderer.hpp"
 #include "clock.hpp"
 
@@ -21,6 +22,8 @@ public:
 private:
     GLFWwindow* window;
 
+    Shader* shader;
+    Camera* camera;
     Renderer* renderer;
     Clock* clock;
 

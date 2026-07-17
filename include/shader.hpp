@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/mat4x4.hpp>
+
 #include <glad/glad.h>
 
 #include <string>
@@ -10,6 +12,8 @@ public:
 
     Shader(std::string path_to_vertex_shader, std::string path_to_fragment_shader);
     ~Shader();
+
+    void SetUniformMatrix4fv(std::string uniform_name, glm::mat4& matrix);
 
 private:
     GLuint CompileShader(std::string path_to_file, char type);

@@ -9,15 +9,15 @@
 
 class Renderer {
 public:
-    Renderer();
+    Renderer(Shader* shader);
     ~Renderer();
 
     void Draw();
 
 private:
+    Shader* shader;
+
     GLuint vao;
     GLuint vbo;
     GLuint ebo;
-
-    Shader* shader;
 };
