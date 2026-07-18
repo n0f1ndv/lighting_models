@@ -21,7 +21,8 @@ private:
 
     GLuint vao;
     GLuint vbo;
-    GLuint ebo;
+    // ebo is used for indices drawing
+    // GLuint ebo;
 
     glm::mat4 model = glm::mat4(1.0f);
 };
