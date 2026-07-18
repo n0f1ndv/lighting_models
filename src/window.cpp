@@ -47,7 +47,7 @@ void Window::Loop() {
     while (!glfwWindowShouldClose(window)) {
         clock->CalculateDelta();
 
-        renderer->Draw();
+        renderer->Render();
 
         glfwSwapBuffers(window);
         glfwPollEvents();

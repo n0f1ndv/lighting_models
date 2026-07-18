@@ -5,7 +5,13 @@
 
 Renderer::Renderer(Shader* shader) 
     : shader{shader} {
-    glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+    Setup();
+
+    glUseProgram(shader->program);
+}
+
+void Renderer::Setup() {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
 
     glGenVertexArrays(1, &vao);
@@ -26,12 +32,6 @@ Renderer::Renderer(Shader* shader)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glBindVertexArray(0);
-
-    glUseProgram(shader->program);
-
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::rotate(model, glm::pi<float>() * 0.5f, glm::vec3(1.0f, 1.0f, 0.0f));
-    shader->SetUniformMatrix4fv("model", model);
 }
 
 Renderer::~Renderer() {
@@ -40,11 +40,13 @@ Renderer::~Renderer() {
     glDeleteBuffers(1, &ebo);
 }
 
-void Renderer::Draw() {
+void Renderer::Render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    model = glm::rotate(model, glm::radians(2.0f), glm::vec3(0.0f, 1.0f, 1.0f));
+    shader->SetUniformMatrix4fv("model", model);
 
     glUseProgram(shader->program);
     glBindVertexArray(vao);
-    // glDrawArrays(GL_TRIANGLES, 0, 3);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 }

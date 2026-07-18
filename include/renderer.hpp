@@ -2,6 +2,7 @@
 
 #include "shader.hpp"
 #include "primitives.hpp"
+#include "clock.hpp"
 
 #include <glad/glad.h>
 
@@ -12,7 +13,8 @@ public:
     Renderer(Shader* shader);
     ~Renderer();
 
-    void Draw();
+    void Setup();
+    void Render();
 
 private:
     Shader* shader;
@@ -20,4 +22,6 @@ private:
     GLuint vao;
     GLuint vbo;
     GLuint ebo;
+
+    glm::mat4 model = glm::mat4(1.0f);
 };
