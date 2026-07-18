@@ -8,6 +8,8 @@ Renderer::Renderer(Shader* shader)
     Setup();
 
     glUseProgram(shader->program);
+    glm::vec3 model_color = glm::vec3(1.0f, 0.2f, 0.5f);
+    shader->SetUniformVec3fv("color", model_color);
 }
 
 void Renderer::Setup() {
