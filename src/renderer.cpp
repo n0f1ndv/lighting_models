@@ -9,7 +9,7 @@ Renderer::Renderer(Shader* shader)
 
     glUseProgram(shader->program);
     glm::vec3 model_color = glm::vec3(1.0f, 0.2f, 0.5f);
-    shader->SetUniformVec3fv("color", model_color);
+    shader->SetUniformVec3fv("model_color", model_color);
 }
 
 void Renderer::Setup() {
@@ -30,8 +30,13 @@ void Renderer::Setup() {
     // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
     // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(CUBE_INDICES), CUBE_INDICES, GL_STATIC_DRAW);
 
+    // attrib_pos
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
     glEnableVertexAttribArray(0);
+
+    // attrib_norm
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
+    glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 

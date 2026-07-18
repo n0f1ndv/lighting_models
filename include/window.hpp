@@ -23,6 +23,7 @@ private:
     GLFWwindow* window;
 
     Shader* shader;
+    Shader* lambert;
     Camera* camera;
     Renderer* renderer;
     Clock* clock;
