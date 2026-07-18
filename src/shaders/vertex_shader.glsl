@@ -6,9 +6,14 @@ out vec3 v_color;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform vec3 camera_position;
 
 void main(void) {
-    gl_Position = projection * view * model * vec4(attrib_pos, 1.0);
+    vec4 world_position = projection * view * model * vec4(attrib_pos, 1.0);
 
-    v_color = (attrib_pos + 1) / 2;
+    float vertex_distance = length(vec4(camera_position, 1.0) - world_position);
+
+    v_color = (attrib_pos * vertex_distance + 1) / 2;
+
+    gl_Position = world_position;
 }

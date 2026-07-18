@@ -26,6 +26,10 @@ void Shader::SetUniformMatrix4fv(std::string uniform_name, glm::mat4& matrix) {
     glUniformMatrix4fv(glGetUniformLocation(program, uniform_name.c_str()), 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
+void Shader::SetUniformVec3fv(std::string uniform_name, glm::vec3& vector) {
+    glUniform3fv(glGetUniformLocation(program, uniform_name.c_str()), 1, glm::value_ptr(vector));
+}
+
 GLuint Shader::CompileShader(std::string path_to_file, char type) {
     std::string source = ReadFile(path_to_file);
 
