@@ -12,7 +12,7 @@ Camera::Camera(Shader* shader, int width, int height)
 void Camera::Init(int width, int height) {
     glUseProgram(shader->program);
 
-    position = glm::vec3(0.0f, 0.0f, -10.0f);
+    position = glm::vec3(0.0f, 0.0f, -3.0f);
     shader->SetUniformVec3fv("camera_position", position);
 
     view = glm::mat4(1.0f);
