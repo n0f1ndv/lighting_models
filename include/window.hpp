@@ -24,6 +24,7 @@ private:
 
     Shader* shader;
     Shader* lambert;
+    Shader* phong;
     Camera* camera;
     Renderer* renderer;
     Clock* clock;
