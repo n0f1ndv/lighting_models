@@ -19,6 +19,8 @@ public:
     void SetUniform1f(std::string uniform_name, float value);
     void SetUniform1i(std::string uniform_name, int value);
 
+    void Use();
+
 private:
     GLuint CompileShader(std::string path_to_file, char type);
     void LinkShader(GLuint vertesShader, GLuint fragmentShader);

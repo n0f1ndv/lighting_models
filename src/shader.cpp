@@ -38,6 +38,10 @@ void Shader::SetUniform1i(std::string uniform_name, int value) {
     glUniform1i(glGetUniformLocation(program, uniform_name.c_str()), value);
 }
 
+void Shader::Use() {
+    glUseProgram(program);
+}
+
 GLuint Shader::CompileShader(std::string path_to_file, char type) {
     std::string source = ReadFile(path_to_file);
 
