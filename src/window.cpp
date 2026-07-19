@@ -39,8 +39,8 @@ void Window::Init() {
 
     shader = new Shader("src/shaders/vertex_shader.glsl", "src/shaders/fragment_shader.glsl");
     lambert = new Shader("src/shaders/vertex_lambert.glsl", "src/shaders/fragment_lambert.glsl");
-    camera = new Camera(lambert, width, height);
-    renderer = new Renderer(lambert);
+    camera = new Camera(shader, width, height);
+    renderer = new Renderer(shader);
     clock = new Clock();
 }
 
