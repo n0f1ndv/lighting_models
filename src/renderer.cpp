@@ -7,10 +7,6 @@ Renderer::Renderer(Shader* shader)
     : shader{shader} {
     Setup();
 
-    glUseProgram(shader->program);
-    glm::vec3 model_color = glm::vec3(1.0f, 0.2f, 0.5f);
-    shader->SetUniformVec3fv("model_color", model_color);
-
     scene = new Scene(shader);
 }
 
@@ -47,7 +43,6 @@ void Renderer::Setup() {
 
 Renderer::~Renderer() {
     delete scene;
-    delete shader;
 
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
@@ -58,10 +53,6 @@ Renderer::~Renderer() {
 void Renderer::Render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    model = glm::rotate(model, glm::radians(2.0f), glm::vec3(0.0f, 1.0f, 1.0f));
-    shader->SetUniformMatrix4fv("model", model);
-
-    glUseProgram(shader->program);
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }

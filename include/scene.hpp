@@ -26,17 +26,33 @@ public:
 };
 
 
+class Object {
+public:
+    glm::vec3 model_color;
+    glm::vec3 position;
+    float rotation_angle;
+    glm::vec3 rotation_axis;
+    glm::vec3 scale;
+
+    Object(
+        glm::vec3 model_color,
+        glm::vec3 position,
+        float rotation_angle,
+        glm::vec3 rotation_axis,
+        glm::vec3 scale
+    );
+};
+
 class Scene {
 public:
     Scene(Shader* shader);
 
     std::vector<PhongLight> lights;
-
-    void UpdateLight(PhongLight& light);
-    void AddObject();
+    std::vector<Object> objects;
 
 private:
     Shader* shader;
 
+    void AddObject(Object& object);
     void AddPhongLight(PhongLight& light);
 };

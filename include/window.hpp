@@ -22,8 +22,8 @@ public:
 private:
     GLFWwindow* window;
 
-    Shader* shader;
-    Shader* lambert;
+    // Shader* shader;
+    // Shader* lambert;
     Shader* phong;
     Camera* camera;
     Renderer* renderer;
