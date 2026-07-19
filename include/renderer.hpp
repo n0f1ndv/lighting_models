@@ -3,6 +3,7 @@
 #include "shader.hpp"
 #include "primitives.hpp"
 #include "clock.hpp"
+#include "scene.hpp"
 
 #include <glad/glad.h>
 
@@ -18,6 +19,7 @@ public:
 
 private:
     Shader* shader;
+    Scene* scene;
 
     GLuint vao;
     GLuint vbo;

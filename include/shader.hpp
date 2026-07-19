@@ -16,6 +16,8 @@ public:
 
     void SetUniformMatrix4fv(std::string uniform_name, glm::mat4& matrix);
     void SetUniformVec3fv(std::string uniform_name, glm::vec3& vector);
+    void SetUniform1f(std::string uniform_name, float value);
+    void SetUniform1i(std::string uniform_name, int value);
 
 private:
     GLuint CompileShader(std::string path_to_file, char type);

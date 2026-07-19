@@ -30,6 +30,14 @@ void Shader::SetUniformVec3fv(std::string uniform_name, glm::vec3& vector) {
     glUniform3fv(glGetUniformLocation(program, uniform_name.c_str()), 1, glm::value_ptr(vector));
 }
 
+void Shader::SetUniform1f(std::string uniform_name, float value) {
+    glUniform1f(glGetUniformLocation(program, uniform_name.c_str()), value);
+}
+
+void Shader::SetUniform1i(std::string uniform_name, int value) {
+    glUniform1i(glGetUniformLocation(program, uniform_name.c_str()), value);
+}
+
 GLuint Shader::CompileShader(std::string path_to_file, char type) {
     std::string source = ReadFile(path_to_file);
 

@@ -10,6 +10,8 @@ Renderer::Renderer(Shader* shader)
     glUseProgram(shader->program);
     glm::vec3 model_color = glm::vec3(1.0f, 0.2f, 0.5f);
     shader->SetUniformVec3fv("model_color", model_color);
+
+    scene = new Scene(shader);
 }
 
 void Renderer::Setup() {
@@ -44,6 +46,9 @@ void Renderer::Setup() {
 }
 
 Renderer::~Renderer() {
+    delete scene;
+    delete shader;
+
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
     // ebo is used for indices drawing

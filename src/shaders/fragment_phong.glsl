@@ -5,28 +5,24 @@ in vec3 viewer_position;
 in vec3 frag_position;
 
 uniform vec3 model_color;
+uniform vec3 light_color;
+uniform vec3 light_position;
+uniform float ambient_reflection_constant;
+uniform float diffuse_reflection_constant;
+uniform float specular_reflection_constant;
+uniform int shininess_constant; 
 
 void main(void) {
-    vec3 light_color = vec3(1.0, 1.0, 0.7);
-    vec3 light_position = vec3(0.0, 0.0, -9.0);
-
     // ambient
-    float ambient_reflection_constant = 0.3;
-
     vec3 ambient = ambient_reflection_constant * light_color;
 
     // diffuse
-    float diffuse_reflection_constant = 0.9;
-
     vec3 light_direction = normalize(light_position - frag_position);                           // vector from surface to light source
     float diff = diffuse_reflection_constant * clamp(dot(light_direction, normal), 0.0, 1.0);
 
     vec3 diffuse = diff * light_color;
 
     // specular
-    float specular_reflection_constant = 0.5;
-    float shininess_constant = pow(2, 6);
-
     vec3 reflected_ray = reflect(-light_direction, normal);                                     // vector of perfect ray, light_direction is negative because the formula requires vector point to the surface
     vec3 viewer_direction = normalize(viewer_position - frag_position);                         // vector from surface to viewer
     
