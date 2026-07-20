@@ -4,6 +4,8 @@
 #include "renderer.hpp"
 #include "clock.hpp"
 
+#include <imgui.h>
+
 #include <glad/glad.h>
 
 #include <GLFW/glfw3.h>
@@ -21,6 +23,8 @@ public:
 
 private:
     GLFWwindow* window;
+
+    ImGuiIO io;
 
     // Shader* shader;
     // Shader* lambert;
