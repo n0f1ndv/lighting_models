@@ -29,21 +29,23 @@ Object::Object(
     , position{position}
     , rotation_angle{rotation_angle}
     , rotation_axis{rotation_axis}
-    , scale{scale} {}
+    , scale{scale}
+    , model{glm::mat4(1.0f)} {}
 
 Scene::Scene(Shader* shader) 
     : shader{shader} {
+    // Initial scene state
     PhongLight light_source = PhongLight(
-        glm::vec3(1.0f, 1.0f, 0.7f),
+        glm::vec3(0.0f, 1.0f, 0.0f),
         glm::vec3(0.0f, 0.0f, -3.0f),
         0.25f,
-        0.5f,
-        0.5f,
+        0.8f,
+        0.3f,
         8
     );
 
     Object cube = Object(
-        glm::vec3(0.0f, 0.0f, 1.0f),
+        glm::vec3(0.0f, 1.0f, 1.0f),
         glm::vec3(0.0f, 0.0f, 0.0f),
         45.0f,
         glm::vec3(0.0f, 1.0f, 0.0f),
@@ -57,28 +59,33 @@ Scene::Scene(Shader* shader)
 void Scene::AddPhongLight(PhongLight& light) {
     lights.push_back(light);
 
-    // Move this to the public Update member function ig
+    // Recently added element is the last one so I pass the last index as an id
+    UpdatePhongLight(lights.size() - 1);    
+}
+
+void Scene::UpdatePhongLight(int id) {
     shader->Use();
-    shader->SetUniformVec3fv("light_color", light.light_color);
-    shader->SetUniformVec3fv("light_position", light.light_position);
-    shader->SetUniform1f("ambient_reflection_constant", light.ambient_reflection_constant);
-    shader->SetUniform1f("diffuse_reflection_constant", light.diffuse_reflection_constant);
-    shader->SetUniform1f("specular_reflection_constant", light.specular_reflection_constant);
-    shader->SetUniform1i("shininess_constant", light.shininess_constant);
+    shader->SetUniformVec3fv("light_color",                 lights[id].light_color);
+    shader->SetUniformVec3fv("light_position",              lights[id].light_position);
+    shader->SetUniform1f("ambient_reflection_constant",     lights[id].ambient_reflection_constant);
+    shader->SetUniform1f("diffuse_reflection_constant",     lights[id].diffuse_reflection_constant);
+    shader->SetUniform1f("specular_reflection_constant",    lights[id].specular_reflection_constant);
+    shader->SetUniform1i("shininess_constant",              lights[id].shininess_constant);
 }
 
 void Scene::AddObject(Object& object) {
     objects.push_back(object);
 
-    glm::mat4 model = glm::mat4(1.0f);
+    object.model = glm::translate(object.model, object.position);
+    object.model = glm::rotate(object.model, glm::radians(object.rotation_angle), object.rotation_axis);
+    object.model = glm::scale(object.model, object.scale);
 
-    model = glm::translate(model, object.position);
+    // Recently added element is the last one so I the pass last index as an id
+    UpdateObject(objects.size() - 1);
+}
 
-    model = glm::rotate(model, glm::radians(object.rotation_angle), object.rotation_axis);
-
-    model = glm::scale(model, object.scale);
-
+void Scene::UpdateObject(int id) {
     shader->Use();
-    shader->SetUniformMatrix4fv("model", model);
-    shader->SetUniformVec3fv("model_color", object.model_color);
+    shader->SetUniformMatrix4fv("model", objects[id].model);
+    shader->SetUniformVec3fv("model_color", objects[id].model_color);
 }

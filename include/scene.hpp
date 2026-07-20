@@ -33,6 +33,7 @@ public:
     float rotation_angle;
     glm::vec3 rotation_axis;
     glm::vec3 scale;
+    glm::mat4 model;
 
     Object(
         glm::vec3 model_color,
@@ -50,9 +51,11 @@ public:
     std::vector<PhongLight> lights;
     std::vector<Object> objects;
 
-private:
-    Shader* shader;
-
+    void UpdatePhongLight(int id);
+    void UpdateObject(int id);
     void AddObject(Object& object);
     void AddPhongLight(PhongLight& light);
+
+private:
+    Shader* shader;
 };
