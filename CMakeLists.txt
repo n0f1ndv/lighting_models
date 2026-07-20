@@ -14,6 +14,13 @@ add_executable(app
     src/camera.cpp
     src/scene.cpp
     libs/glad/glad.c
+    libs/imgui/imgui.cpp
+    libs/imgui/imgui_demo.cpp
+    libs/imgui/imgui_draw.cpp
+    libs/imgui/imgui_tables.cpp
+    libs/imgui/imgui_widgets.cpp
+    libs/imgui/backends/imgui_impl_glfw.cpp
+    libs/imgui/backends/imgui_impl_opengl3.cpp
 )
 
 target_include_directories(app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -26,6 +33,8 @@ target_include_directories(app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 # add_subdirectory(libs)
 # target_link_libraries(${PROJECT_NAME} PUBLIC name_of_vendor_library)
 
+target_include_directories(app SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/imgui/backends)
+target_include_directories(app SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/imgui)
 target_include_directories(app SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/glm)
 target_include_directories(app SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs)
 
