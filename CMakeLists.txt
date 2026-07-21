@@ -13,6 +13,7 @@ add_executable(app
     src/renderer.cpp
     src/camera.cpp
     src/scene.cpp
+    src/gui.cpp
     libs/glad/glad.c
     libs/imgui/imgui.cpp
     libs/imgui/imgui_demo.cpp

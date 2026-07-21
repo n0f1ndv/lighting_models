@@ -3,6 +3,7 @@
 #include "camera.hpp"
 #include "renderer.hpp"
 #include "clock.hpp"
+#include "gui.hpp"
 
 #include <imgui.h>
 
@@ -24,10 +25,9 @@ public:
 private:
     GLFWwindow* window;
 
-    ImGuiIO io;
-
-    // Shader* shader;
-    // Shader* lambert;
+    Gui* gui;
+    Shader* shader;
+    Shader* lambert;
     Shader* phong;
     Camera* camera;
     Renderer* renderer;
