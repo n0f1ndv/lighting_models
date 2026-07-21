@@ -24,6 +24,8 @@ add_executable(app
     libs/imgui/backends/imgui_impl_opengl3.cpp
 )
 
+target_compile_options(app PRIVATE -Wall)
+
 target_include_directories(app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Using vendor libraries may vary so check out the documentation for instructions.

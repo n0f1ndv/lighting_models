@@ -16,7 +16,6 @@ Window::~Window() {
     delete shader;
     delete lambert;
     delete phong;
-    delete gui;
 
     glfwTerminate();
 }
@@ -45,12 +44,11 @@ void Window::Init() {
         glfwTerminate();
     }
     
-    gui = new Gui(window);
     shader = new Shader("src/shaders/vertex_shader.glsl", "src/shaders/fragment_shader.glsl");
     lambert = new Shader("src/shaders/vertex_lambert.glsl", "src/shaders/fragment_lambert.glsl");
     phong = new Shader("src/shaders/vertex_phong.glsl", "src/shaders/fragment_phong.glsl");
+    renderer = new Renderer(window, phong);
     camera = new Camera(phong, width, height);
-    renderer = new Renderer(phong, gui);
     clock = new Clock();
 }
 

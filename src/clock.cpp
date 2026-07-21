@@ -3,10 +3,10 @@
 #include <iostream>
 
 Clock::Clock() 
-    : current_frame{0}
-    , time{0}
+    : time{0}
     , delta_time{0}
-    , last_frame{0} {}
+    , last_frame{0}
+    , current_frame{0} {}
 
 void Clock::CalculateDelta() {
     current_frame = glfwGetTime();

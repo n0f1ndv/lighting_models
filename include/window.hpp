@@ -3,7 +3,6 @@
 #include "camera.hpp"
 #include "renderer.hpp"
 #include "clock.hpp"
-#include "gui.hpp"
 
 #include <imgui.h>
 
@@ -13,8 +12,8 @@
 
 class Window {
 public:
-    int height;
     int width;
+    int height;
 
     Window(int width, int height);
     ~Window();
@@ -25,7 +24,6 @@ public:
 private:
     GLFWwindow* window;
 
-    Gui* gui;
     Shader* shader;
     Shader* lambert;
     Shader* phong;

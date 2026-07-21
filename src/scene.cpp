@@ -3,6 +3,8 @@
 #include <glm/mat4x4.hpp>
 #include <glm/ext/matrix_transform.hpp>
 
+#include <iostream>
+
 PhongLight::PhongLight(
     glm::vec3 light_color,
     glm::vec3 light_position,

@@ -12,16 +12,18 @@
 
 class Renderer {
 public:
-    Renderer(Shader* shader, Gui* gui);
+    Renderer(GLFWwindow* window, Shader* shader);
     ~Renderer();
 
     void Setup();
     void Render();
 
 private:
-    Gui* gui;
+    GLFWwindow* window;
+
     Shader* shader;
     Scene* scene;
+    Gui* gui;
 
     GLuint vao;
     GLuint vbo;

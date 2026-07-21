@@ -1,13 +1,31 @@
 #include "gui.hpp"
 
-#include <glad/glad.h>
-
-#include <GLFW/glfw3.h>
-
 #include <glm/vec3.hpp>
 
-Gui::Gui(GLFWwindow* window)
-    : window{window} {
+Gui::Gui(GLFWwindow* window, Scene* scene)
+    : window{window}
+    , scene{scene} {
+    light_color = ImVec4(
+        scene->lights[0].light_color.x,
+        scene->lights[0].light_color.y,
+        scene->lights[0].light_color.z,
+        1.0f
+    );
+
+    light_position= ImVec4(
+        scene->lights[0].light_position.x,
+        scene->lights[0].light_position.y,
+        scene->lights[0].light_position.z,
+        1.0f
+    );
+
+    model_color = ImVec4(
+        scene->objects[0].model_color.x,
+        scene->objects[0].model_color.y,
+        scene->objects[0].model_color.z,
+        1.0f
+    );
+
     Init();
 }
 
@@ -18,8 +36,6 @@ Gui::~Gui() {
 }
 
 void Gui::Init() {
-    const char* glsl_version = nullptr;
-
     main_scale = ImGui_ImplGlfw_GetContentScaleForMonitor(glfwGetPrimaryMonitor());
 
     IMGUI_CHECKVERSION();
@@ -34,6 +50,7 @@ void Gui::Init() {
     style.ScaleAllSizes(main_scale);
     style.FontScaleDpi = main_scale;
 
+    const char* glsl_version = nullptr;
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 }
@@ -43,49 +60,42 @@ void Gui::CreateWindow() {
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    static int i = 0;
-    static float f0 = 0;
-    static float f1 = 0;
-    static float f2 = 0;
-    static int counter = 0;
-
-    ImVec4 col = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-    glm::vec3 color = glm::vec3(col.x, col.y, col.z);
-
     ImGui::Begin("Settings");
 
     ImGui::Text("Light parameters");
 
     ImGui::Text("Shininess constant");
     ImGui::SameLine();
-    ImGui::SliderInt("shininess", &i, 0, 12);
+    ImGui::SliderInt("shininess", &scene->lights[0].shininess_constant, 0, 12);
 
     ImGui::Text("Ambient reflection constant");
     ImGui::SameLine();
-    ImGui::SliderFloat("ambient", &f0, 0.0f, 1.0f);
+    ImGui::SliderFloat("ambient", &scene->lights[0].ambient_reflection_constant, 0.0f, 1.0f);
 
     ImGui::Text("Diffuse reflection constant");
     ImGui::SameLine();
-    ImGui::SliderFloat("diffuse", &f1, 0.0f, 1.0f);
+    ImGui::SliderFloat("diffuse", &scene->lights[0].diffuse_reflection_constant, 0.0f, 1.0f);
 
     ImGui::Text("Specular reflection constant");
     ImGui::SameLine();
-    ImGui::SliderFloat("specular", &f2, 0.0f, 1.0f);
+    ImGui::SliderFloat("specular", &scene->lights[0].specular_reflection_constant, 0.0f, 1.0f);
 
     ImGui::Text("Light color");
     ImGui::SameLine();
-    ImGui::ColorEdit3("light color", (float*)&col);
+    ImGui::ColorEdit3("light color", &scene->lights[0].light_color.x);
 
     ImGui::Text("Light position");
     ImGui::SameLine();
-    ImGui::ColorEdit3("light position", (float*)&col);
+    ImGui::SliderFloat3("light position", &scene->lights[0].light_position.x, -5.0f, 5.0f);
 
     ImGui::Text("Model parameters");
 
     ImGui::Text("Model color");
     ImGui::SameLine();
-    ImGui::ColorEdit3("model color", (float*)&col);
+    ImGui::ColorEdit3("model color", &scene->objects[0].model_color.x);
+
+    scene->UpdatePhongLight(0);
+    scene->UpdateObject(0);
 
     ImGui::End();
 }

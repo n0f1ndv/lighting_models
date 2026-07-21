@@ -3,12 +3,13 @@
 #include <glm/mat4x4.hpp>
 #include <glm/ext/matrix_transform.hpp>
 
-Renderer::Renderer(Shader* shader, Gui* gui) 
-    : shader{shader}
-    , gui{gui} {
+Renderer::Renderer(GLFWwindow* window, Shader* shader) 
+    : window{window}
+    , shader{shader} {
     Setup();
 
     scene = new Scene(shader);
+    gui = new Gui(window, scene);
 }
 
 void Renderer::Setup() {
@@ -44,6 +45,7 @@ void Renderer::Setup() {
 
 Renderer::~Renderer() {
     delete scene;
+    delete gui;
 
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
