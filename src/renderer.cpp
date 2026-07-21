@@ -3,8 +3,9 @@
 #include <glm/mat4x4.hpp>
 #include <glm/ext/matrix_transform.hpp>
 
-Renderer::Renderer(Shader* shader) 
-    : shader{shader} {
+Renderer::Renderer(Shader* shader, Gui* gui) 
+    : shader{shader}
+    , gui{gui} {
     Setup();
 
     scene = new Scene(shader);
@@ -55,4 +56,7 @@ void Renderer::Render() {
 
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    gui->CreateWindow();
+    gui->Render();
 }

@@ -4,6 +4,7 @@
 #include "primitives.hpp"
 #include "clock.hpp"
 #include "scene.hpp"
+#include "gui.hpp"
 
 #include <glad/glad.h>
 
@@ -11,13 +12,14 @@
 
 class Renderer {
 public:
-    Renderer(Shader* shader);
+    Renderer(Shader* shader, Gui* gui);
     ~Renderer();
 
     void Setup();
     void Render();
 
 private:
+    Gui* gui;
     Shader* shader;
     Scene* scene;
 

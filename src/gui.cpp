@@ -4,6 +4,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include <glm/vec3.hpp>
+
 Gui::Gui(GLFWwindow* window)
     : window{window} {
     Init();
@@ -41,33 +43,59 @@ void Gui::CreateWindow() {
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    {
-        static float f = 0.0f;
-        static int counter = 0;
-    
-        ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    static int i = 0;
+    static float f0 = 0;
+    static float f1 = 0;
+    static float f2 = 0;
+    static int counter = 0;
 
-        ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+    ImVec4 col = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-        ImGui::Text("This is some useful text.");
+    glm::vec3 color = glm::vec3(col.x, col.y, col.z);
 
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-        ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+    ImGui::Begin("Settings");
 
-        if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-            counter++;
-        ImGui::SameLine();
-        ImGui::Text("counter = %d", counter);
+    ImGui::Text("Light parameters");
 
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-        ImGui::End();
-    }
+    ImGui::Text("Shininess constant");
+    ImGui::SameLine();
+    ImGui::SliderInt("shininess", &i, 0, 12);
+
+    ImGui::Text("Ambient reflection constant");
+    ImGui::SameLine();
+    ImGui::SliderFloat("ambient", &f0, 0.0f, 1.0f);
+
+    ImGui::Text("Diffuse reflection constant");
+    ImGui::SameLine();
+    ImGui::SliderFloat("diffuse", &f1, 0.0f, 1.0f);
+
+    ImGui::Text("Specular reflection constant");
+    ImGui::SameLine();
+    ImGui::SliderFloat("specular", &f2, 0.0f, 1.0f);
+
+    ImGui::Text("Light color");
+    ImGui::SameLine();
+    ImGui::ColorEdit3("light color", (float*)&col);
+
+    ImGui::Text("Light position");
+    ImGui::SameLine();
+    ImGui::ColorEdit3("light position", (float*)&col);
+
+    ImGui::Text("Model parameters");
+
+    ImGui::Text("Model color");
+    ImGui::SameLine();
+    ImGui::ColorEdit3("model color", (float*)&col);
+
+    ImGui::End();
 }
 
 void Gui::Render() {
     ImGui::Render();
+
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
+
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

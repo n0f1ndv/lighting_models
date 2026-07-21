@@ -50,7 +50,7 @@ void Window::Init() {
     lambert = new Shader("src/shaders/vertex_lambert.glsl", "src/shaders/fragment_lambert.glsl");
     phong = new Shader("src/shaders/vertex_phong.glsl", "src/shaders/fragment_phong.glsl");
     camera = new Camera(phong, width, height);
-    renderer = new Renderer(phong);
+    renderer = new Renderer(phong, gui);
     clock = new Clock();
 }
 
@@ -58,11 +58,7 @@ void Window::Loop() {
     while (!glfwWindowShouldClose(window)) {
         clock->CalculateDelta();
 
-        gui->CreateWindow();
-
         renderer->Render();
-
-        gui->Render();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
